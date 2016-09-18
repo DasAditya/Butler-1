@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+
+        {% if houses %}
+            <!-- Houses -->
+            <div class="row">
+                {% for house in houses %}
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="thumbnail">
+                            <a href="{% url 'houseonrent:detail' house.id %}">
+                                <img src="{{ house.house_logo.url }}" class="img-responsive" width="225px" height="225px">
+                            </a>
+                            <div class="caption">
+                                <h4>{{ house.house_title }}</h4>
+                                <h6>{{ house.size_bhk }}</h6>
+                                <h6>{{ house.location }}</h6>
+                                <h4>{{ house.rent_price }}</h4>
+
+                                <!-- View Details -->
+                                <a href=" {% url 'houseonrent:detail' house.id %}" class="btn btn-danger btn-sm" role="button">
+                                    View Details
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <h3>No Houses available</h3>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
+

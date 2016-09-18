@@ -1,0 +1,49 @@
+.demo-layout-transparent {
+    background: url('images/homepic1.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header{
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+}
+.demo-card-image.mdl-card {
+    width: 256px;
+    height: 256px;
+    margin-bottom:40px;
+    border-radius:5px;
+}
+.demo-card-image > .mdl-card__actions {
+    height: 52px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+
+}
+.demo-card-image__filename {
+    color: #fff;
+    font-size: 24px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 500;
+}
+
+#rentcard {
+    background: url('images/houseonrent.jpg') center / cover;
+}
+
+#eleccard {
+    background: url('images/electrician.jpg') center / cover;
+}
+
+#hotelcard {
+    background: url('images/hotelsnearby.png') center / cover;
+}
+
+#furniturecard {
+    background: url('images/furniture.jpg') center / cover;
+}
+
+#maidcard {
+    background: url('images/maid.jpg') center / cover;
+}
+
+#grocerycard {
+    background: url('images/grocery.jpg') center / cover;
+}

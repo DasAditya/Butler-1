@@ -1,0 +1,64 @@
+{% extends 'home/base.html' %}
+
+
+{% block body %}
+
+    <div class="mdl-grid">
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <a href="{% url 'houseonrent:index' %}" style="text-decoration:none">
+                <div class="demo-card-image mdl-card mdl-shadow--4dp" id="rentcard">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename">House On Rent</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="eleccard">
+                <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Electrician</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="hotelcard">
+            <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Hotels Nearby</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="furniturecard">
+            <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Furniture</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="maidcard">
+            <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Maid On Demand</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mdl-cell--1-offset mdl-cell-3-col">
+            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="grocerycard">
+            <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="demo-card-image__filename">Grocery</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
