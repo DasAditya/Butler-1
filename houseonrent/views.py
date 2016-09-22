@@ -9,8 +9,14 @@ def index(request):
         base = "home/base_logged_in.html"
     else:
         base = "home/base_visitor.html"
+<<<<<<< HEAD
     context = {'houses': all_houses,
                'base_template': base, }
+=======
+    context = {}
+    context = {'houses': all_houses,
+               'base_template': base,}
+>>>>>>> origin/master
     return render(request, 'houseonrent/index.html', context)
 
 
@@ -19,6 +25,7 @@ def detail(request, pk):
     context = {'house': house}
     return render(request, 'houseonrent/detail.html', context)
 
+<<<<<<< HEAD
 
 def bookmark_house(request, pk):
     house = get_object_or_404(House, pk=pk)
@@ -35,3 +42,5 @@ def bookmark_house(request, pk):
 
 # def bookmarks(request):
 #     houses = BookmarkHouse.objects.filter(user=request.user)
+=======
+>>>>>>> origin/master
