@@ -1,0 +1,23 @@
+{% extends base_template %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+
+                    <form action="{% url 'restaurants:index' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Search"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

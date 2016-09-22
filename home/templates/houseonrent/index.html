@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends base_template %}
 
 {% block body %}
 
@@ -11,7 +11,7 @@
                     <div class="col-sm-6 col-lg-3">
                         <div class="thumbnail">
                             <a href="{% url 'houseonrent:detail' house.id %}">
-                                <img src="{{ house.house_logo.url }}" class="img-responsive" width="225px" height="225px">
+                                <img src="{{ house.house_logo.url }}" style="height:200px;width:300px;">
                             </a>
                             <div class="caption">
                                 <h4>{{ house.house_title }}</h4>
@@ -22,6 +22,10 @@
                                 <!-- View Details -->
                                 <a href=" {% url 'houseonrent:detail' house.id %}" class="btn btn-danger btn-sm" role="button">
                                     View Details
+                                </a>
+
+                                <a href="{% url 'houseonrent:bookmark_house' house.id %}" class="btn btn-default btn-sm" role="button">
+                                    <span class="glyphicon glyphicon-star"></span>
                                 </a>
 
                             </div>

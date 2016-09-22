@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'restaurants.apps.RestaurantsConfig',
     'houseonrent.apps.HouseonrentConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',

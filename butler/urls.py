@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^home/', include('home.urls')),
     url(r'^houseonrent/', include('houseonrent.urls')),
+    url(r'^restaurants/', include('restaurants.urls')),
 
 ]
 

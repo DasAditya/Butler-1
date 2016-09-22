@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BUTLER</title>
+
+    {% load staticfiles %}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'home/styles.css' %}" />
+
+</head>
+
+
+<body>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title" style="font-family:calibri;font-size:30px;">BUTLER</span>
+                <a href="{% url 'home:index' %}" class="mdl-button mdl-color-text--white">
+                    Home
+                </a>
+
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a href="" class="mdl-button mdl-color-text--white">
+                        <i class="material-icons">bookmark</i>
+                        Favorites
+                    </a>
+                    <a href="" class="mdl-button mdl-color-text--white">
+                        <i class="material-icons">library_books</i>
+                        Forums
+                    </a>
+                    <a href="{% url 'home:logout_user' %}" class="mdl-button mdl-color-text--white">
+                        <i class="material-icons">power_settings_new</i>
+                        Sign Out
+                    </a>
+                    <i class="material-icons" style="font-size: 50px;">account_circle</i>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Modal -->
+<!--
+        <div class="modal fade" id="loginModal" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Log In</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
+                                <label for="input_email" class="mdl-textfield__label">Email</label>
+                                <input type="email" class="mdl-textfield__input" id="input_email" />
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
+                                <label for="input_password" class="mdl-textfield__label">Password</label>
+                                <input type="password" class="mdl-textfield__input" id="input_password" />
+                            </div>
+                            <br>
+                            <button class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect"
+                                    type="submit">
+                                Sign In
+                            </button>
+                            <br>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#">Sign Up</a> &nbsp;
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+-->
+
+        <main class="mdl-layout__content">
+            <br>
+            <br>
+
+            {% block body %}
+
+            {% endblock %}
+
+            <footer class="mdl-mini-footer" style="padding:10px 10px;">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">Butler</div>
+                    <ul class="mdl-mini-footer__link-list" style="padding-left:50px;">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

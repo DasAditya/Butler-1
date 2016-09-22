@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class House(models.Model):
     house_title = models.CharField(max_length=100)
@@ -22,3 +22,9 @@ class House(models.Model):
 class Picture(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     pic_logo = models.FileField()
+
+
+class BookmarkHouse(models.Model):
+    user = models.ForeignKey(User, default=1)
+    house = models.ForeignKey(House, on_delete=models.CASCADE)
+    is_bookmarked = models.BooleanField(default=True)
