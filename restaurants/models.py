@@ -16,6 +16,7 @@ class Restaurant(models.Model):
     user_rating_agg = models.FloatField()
     user_rating_vote = models.FloatField()
     res_id = models.IntegerField()
+    is_bookmarked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.restaurant_name
@@ -35,7 +36,9 @@ class BookmarkRest(models.Model):
     user_rating_agg = models.FloatField()
     user_rating_vote = models.FloatField()
     res_id = models.IntegerField()
-    is_bookmarked = models.BooleanField(default=True)
 
+
+    def __str__(self):
+        return self.restaurant_name + '- bookmark'
 
 

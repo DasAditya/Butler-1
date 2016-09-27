@@ -47,3 +47,12 @@
 #grocerycard {
     background: url('images/grocery.jpg') center / cover;
 }
+
+.glyphicon-bookmark {
+    color: #CCCCCC;
+    font-size: 16px;
+}
+
+.glyphicon-bookmark.active {
+    color: #FDB230;
+}

@@ -27,6 +27,12 @@
                 <a href="{% url 'home:index' %}" class="mdl-button mdl-color-text--white">
                     Home
                 </a>
+                <form class="navbar-form navbar-left" role="search" method="get" action="{% block search %}{% endblock %}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search Here..." name="q" value="{{ request.GET.q }}">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
 
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
@@ -90,8 +96,6 @@
 -->
 
         <main class="mdl-layout__content">
-            <br>
-            <br>
             <br>
 
             {% block body %}

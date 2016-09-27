@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'home/main.js' %}"></script>
 
         <link rel="stylesheet" type="text/css" href="{% static 'home/styles.css' %}" />
 
@@ -27,12 +28,18 @@
                 <a href="{% url 'home:index' %}" class="mdl-button mdl-color-text--white">
                     Home
                 </a>
+                <form class="navbar-form navbar-left" role="search" method="get" action="{% block search %}{% endblock %}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search Here..." name="q" value="{{ request.GET.q }}">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </form>
 
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <a href="" class="mdl-button mdl-color-text--white">
+                    <a href="{% url 'home:favorites' %}" class="mdl-button mdl-color-text--white">
                         <i class="material-icons">bookmark</i>
                         Favorites
                     </a>
@@ -91,7 +98,6 @@
 -->
 
         <main class="mdl-layout__content">
-            <br>
             <br>
 
             {% block body %}

@@ -17,6 +17,9 @@ urlpatterns = [
     # /home/login/
     url(r'^logout_user/$', views.logout_user, name='logout_user'),
 
+    # /home/favorites/
+    url(r'^favorites/$', views.favorites, name='favorites'),
+
     # /home/houseonrent/
     # url(r'^houseonrent/', include('houseonrent.urls'), name='houseonrent'),
 

@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import requests
-from .models import Restaurant
+from .models import Restaurant, BookmarkRest
 from .forms import RestSearchForm
+from django.http import JsonResponse
+from django.db.models import Q
+from home.views import favorites
 
 
 def index(request):
@@ -9,20 +12,13 @@ def index(request):
         base = "home/base_logged_in.html"
     else:
         base = "home/base_visitor.html"
-
     if request.method == "POST":
         form = RestSearchForm(request.POST)
         if form.is_valid():
             loc = form.cleaned_data['location']
             Restaurant.objects.all().delete()
-            # geolocator=Nominatim()
-            # lati=0
-            # while (lati==0): AIzaSyAzdZVMQeq3WZFbeO7wGZ9Un49xSwbdJiU
-            # location = geolocator.geocode(loc,timeout=1000)
-            # lati=location.latitude
-            # longi=location.longitude
 
-            url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + loc.replace(" ","+") + \
+            url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + loc.replace(" ", "+") + \
                   "&key=AIzaSyAzdZVMQeq3WZFbeO7wGZ9Un49xSwbdJiU"
             r1 = requests.get(url)
             for p in r1.json()['results']:
@@ -37,8 +33,6 @@ def index(request):
                 header = {"User-agent": "curl/7.43.0", "Accept": "application/json",
                           "user_key": "1932a0b77f3352d89db1b1cc3d3a04e9"}
                 r = requests.get(locationUrlFromLatLong, headers=header)
-                # r = requests.get('https://developers.zomato.com/api/v2.1/geocode?lat=41.10867962215988&lon=29.01834726333618',headers={'user_key: 1932a0b77f3352d89db1b1cc3d3a04e9' ,'Accept: application/json'})
-                # json = r.json()
 
                 for p in r.json()['restaurants']:
                     a = Restaurant()
@@ -54,20 +48,99 @@ def index(request):
                     a.user_rating_agg = p['restaurant']['user_rating']['aggregate_rating']
                     a.user_rating_vote = p['restaurant']['user_rating']['votes']
                     a.res_id = p['restaurant']['R']['res_id']
+                    temp = BookmarkRest.objects.filter(res_id=a.res_id, user=request.user).count()
+                    if temp != 0:
+                        a.is_bookmarked = True
                     a.save()
                 offset += 20
 
             restaurants = Restaurant.objects.all()
-            #         serializer = EmbedSerializer(data=json)
-            #         serializer.is_valid()
-            #         embed = serializer.save()
             context = {'restaurants': restaurants,
-                       'base_template': base, }
+                       'base_template': base,
+                       'form': form
+                       }
             return render(request, 'restaurants/index.html', context)
     else:
         form = RestSearchForm()
         restaurants = Restaurant.objects.all()
+        if request.user.is_authenticated():
+            for r in restaurants:
+                temp = BookmarkRest.objects.filter(res_id=r.res_id, user=request.user).count()
+                if temp != 0:
+                    r.is_bookmarked = True
+                else:
+                    r.is_bookmarked = False
+
         context = {'restaurants': restaurants,
-                 'form': form,
-                 'base_template': base, }
+                   'form': form,
+                   'base_template': base, }
     return render(request, 'restaurants/index.html', context)
+
+
+def bookmark_resto(request, pk):
+    rest = get_object_or_404(Restaurant, pk=pk)
+    try:
+        temp = BookmarkRest.objects.filter(res_id=rest.res_id, user=request.user).count()
+        if temp == 0:
+            a = BookmarkRest()
+            a.user = request.user
+            a.restaurant_name = rest.restaurant_name
+            a.location_address = rest.location_address
+            a.location_locality = rest.location_locality
+            a.location_city = rest.location_city
+            a.location_latitude = rest.location_latitude
+            a.location_longitude = rest.location_longitude
+            a.restaurant_cuisine = rest.restaurant_cuisine
+            a.restaurant_avgcostfor2 = rest.restaurant_avgcostfor2
+            a.restaurant_thumb = rest.restaurant_thumb
+            a.user_rating_agg = rest.user_rating_agg
+            a.user_rating_vote = rest.user_rating_vote
+            a.res_id = rest.res_id
+            a.save()
+        else:
+            if rest.is_bookmarked:
+                rest.is_bookmarked = False
+            else:
+                rest.is_bookmarked = True
+            BookmarkRest.objects.filter(res_id=rest.res_id, user=request.user).delete()
+    except (KeyError, BookmarkRest.DoesNotExist):
+        return JsonResponse({'success': False})
+    else:
+        return JsonResponse({'success': True})
+
+
+def delete_rest(request, pk):
+    rest = get_object_or_404(BookmarkRest, pk=pk)
+    temp = Restaurant.objects.filter(res_id=rest.res_id).count()
+    if temp != 0:
+        temp = Restaurant.objects.filter(res_id=rest.res_id)[0]
+        if temp.is_bookmarked:
+            temp.is_bookmarked = False
+        else:
+            temp.is_bookmarked = True
+    rest.delete()
+    return favorites(request)
+
+
+def search(request):
+    if request.user.is_authenticated():
+        base = "home/base_logged_in.html"
+    else:
+        base = "home/base_visitor.html"
+    form = RestSearchForm()
+    restaurants = Restaurant.objects.all()
+    query = request.GET.get("q")
+    if query:
+        restaurants = restaurants.filter(
+            Q(restaurant_name__icontains=query) |
+            Q(restaurant_cuisine__icontains=query)
+        ).distinct()
+        context = {'restaurants': restaurants,
+                   'form': form,
+                   'base_template': base, }
+        return render(request, 'restaurants/index.html', context)
+    else:
+        context = {'restaurants': restaurants,
+                   'form': form,
+                   'base_template': base, }
+        return render(request, 'restaurants/index.html', context)
