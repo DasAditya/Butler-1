@@ -1,0 +1,128 @@
+
+			.sec{
+
+				min-height: 50%;
+				background-color: #d9dba6;
+
+			}
+			.flt
+			{
+				float:right;
+				max-height: 318px;
+				max-width:232px;
+			}
+			@font-face
+			{
+			font-family:kirvy;
+			src: url('fonts/Kirvy-Light.otf');
+			}
+			.bod{
+			overflow-x:hidden;
+			font-family:kirvy;
+
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			}
+			.button1 {
+			background: #ecedd1;
+			color: #806040;
+			height:auto;
+			width:auto;
+			margin:none;
+			border-style:none;
+			border-radius: 5px;
+			transition: all 0.3s ease 0s;
+			}
+
+			.button1:hover {
+			background: #806040;
+			color: #FFFFFF;
+			}
+			.dropdown-menu
+			{
+				background:#ecedd1 ;
+			}
+			.droplist
+			{
+				color: #806040;
+			}
+			.dropdown-menu
+			{
+				background:#ecedd1 ;
+			}
+			.droplist
+			{
+				color: #806040;
+			}
+			.sub1
+			{
+				color:white;
+				font-size: 25px;
+				font-family:zona;
+				letter-spacing: 3px;
+			}
+			.sub
+			{
+				font-weight:bolder;
+				color:#806040;
+				font-size: 25px;
+				font-family:zona;
+				letter-spacing: 3px;
+			}
+			@font-face
+			{
+			font-family:zona;
+			src: url('fonts/ZonaPro-Thin.otf');
+			}
+
+			.parallax1 {
+
+				background:url('images/house13.jpg') center/cover;
+				/* Set a specific height */
+				min-height: 100%;
+				/* Create the parallax scrolling effect */
+				background-attachment: fixed;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+
+			}
+			#furniture {
+
+				background:url('images/chair.jpg') center/cover;
+				/* Set a specific height */
+				min-height: 50%;
+				/* Create the parallax scrolling effect */
+				background-attachment: fixed;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+
+			}
+			#food {
+
+				background:url('images/food2.jpg') center/cover;
+				/* Set a specific height */
+				min-height: 50%;
+				/* Create the parallax scrolling effect */
+				background-attachment: fixed;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+
+
+			}
+			#service {
+
+				background:url('images/demand.jpg') center/cover;
+				/* Set a specific height */
+				min-height: 50%;
+				/* Create the parallax scrolling effect */
+				background-attachment: fixed;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+
+			}
+
+

@@ -5,9 +5,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^home/', include('home.urls')),
+    url(r'^', include('home.urls')),
     url(r'^houseonrent/', include('houseonrent.urls')),
     url(r'^restaurants/', include('restaurants.urls')),
+    url(r'^forums/', include('forums.urls')),
+    url(r'^homeservices/', include('homeservices.urls')),
+    url(r'^furnitures/', include('furnitures.urls')),
+
 
 ]
 

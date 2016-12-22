@@ -1,0 +1,113 @@
+{% extends base_template %}
+
+{% block search %}
+    {% url 'homeservices:search' %}
+{% endblock %}
+
+{% block body %}
+
+	</br></br></br></br></br>
+
+	{% if request.user.is_authenticated %}
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div align="right">
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal5">Add a Topic</button>
+				<!--Modal-->
+				<div class="modal fade" id="myModal5" tabindex="-1" role="dialog"
+					 aria-labelledby="myModalLabel7" aria-hidden="true">
+				  <div class="modal-dialog " role="document">
+					<div class="modal-content">
+					<div align="center"><h4 class="card-title"> Add a topic</h4></div>
+			<form style="padding:10px;" method="post" enctype="multipart/form-data" action="{% url 'forums:add_topic' %}">
+				{% csrf_token %}
+			  <div class="form-group row" align="center">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+				<input type="text" class="form-control" name="topic" placeholder="Eg: where can I have some sushi?">
+					<br>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+				<input type="text" class="form-control" name="category" placeholder="Category">
+				<div align="center" style="padding: 5px;">
+					<button type="submit" class="btn btn-default">Add</button>
+				</div></div>
+			 </div>
+			</form>
+					</div>
+				  </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<br>
+	<br>
+	<br>
+
+	<div class="row">
+
+		<div class="col-sm-2">
+		</div>
+		<div class="col-sm-8">
+
+			<div class="panel-group" id="accordion">
+				{% for topic in topics %}
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" data-target="#{{topic.id}}" style="cursor:pointer;">
+								<strong style="font-weight:bolder; font-size:16px; color:#806040;">{{topic.user.username}} : </strong>
+								{{topic.title}}
+								<strong style="font-weight:lighter; font-size:12px;color:grey;">{{topic.created_time}}</strong>
+								</br>
+
+								{{topic.category}}
+							</a>
+							<span class="badge flt" style="margin">{{topic.no_of_posts}}</span>
+
+						</h4>
+					</div>
+					<div id="{{topic.id}}" class="panel-collapse collapse">
+						<div class="panel-body">
+							{% for post in topic.post_set.all %}
+							<!--Response 1-->
+							<p>
+
+								<strong style="font-weight:bolder; font-size:16px; color:#806040;">{{post.user.username}}</strong>
+								<strong style="font-weight:lighter; font-size:12px;color:grey;">{{post.created_time}}</strong>
+								: {{post.msg}}
+
+
+							</p>
+
+							{% endfor %}
+						{% if request.user.is_authenticated %}
+
+							<form action="{% url 'forums:add_post' topic.id %}" enctype="multipart/form-data" method="post">
+								{% csrf_token %}
+							  <div class="form-group row" align="center">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-7">
+								<input type="text" class="form-control" name="post" placeholder="Enter response">
+								</div>
+							 <div class="col-sm-2">
+								<button type="submit" class="btn btn-default">Leave a response</button>
+							 </div>
+							 </div>
+							</form>
+						{% endif %}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+
+
+
+
+		</div>
+	</div>
+	</div>
+
+{% endblock %}

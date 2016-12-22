@@ -1,42 +1,103 @@
 {% extends 'home/base_visitor.html' %}
 
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{%static 'home/sty_register.css'%}">
+{% endblock %}
 
 {% block body %}
-    <div class= "container-fluid">
+    <br><br><br><br><br><br><br>
+    <div class="content">
         <div class="row">
-            <div class="col-md-6">
 
-                <div class="panel panel-default">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8">
 
-                    <div class="panel-heading">Sign Up</div>
-
-                    <div class="panel-body">
-                        {% if error_message %}
-                            <p><strong>{{ error_message }}</strong></p>
-                        {% endif %}
-
-                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% include 'home/form_template.html' %}
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
+                <div align="center"> <p class="sub marg-bott">Sign Up</p>
+                    <form role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group row marg-bott" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_fname" class="col-xs-2 col-form-label">
+                                <div class="sub1">First Name</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.first_name}}
                             </div>
-                        </form>
-                    </div>
-
-                    <div class="panel-footer">
-                        <a href="{% url 'home:login_user' %}">Login</a> &nbsp;
-                    </div>
-
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.first_name.errors}}
+                            </div>
+                        </div>
+                        <div class="form-group row marg-bott" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_lname" class="col-xs-2 col-form-label">
+                                <div class="sub1">Last Name</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.last_name}}
+                            </div>
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.last_name.errors}}
+                            </div>
+                        </div>
+                        <div class="form-group row marg-bott" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_user" class="col-xs-2 col-form-label">
+                                <div class="sub1">{{form.username.label}}</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.username}}
+                            </div>
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.username.errors}}
+                            </div>
+                        </div>
+                        <div class="form-group row marg-bott" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_email" class="col-xs-2 col-form-label">
+                                <div class="sub1">Email</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.email}}
+                            </div>
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.email.errors}}
+                            </div>
+                        </div>
+                        <div class="form-group row marg-bott" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_pass" class="col-xs-2 col-form-label">
+                                <div class="sub1">Enter Password</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.password1}}
+                            </div>
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.password.errors}}
+                            </div>
+                        </div>
+                        <div class="form-group row" align="center">
+                            <div class="col-xs-3"></div>
+                            <label for="id_pass2" class="col-xs-2 col-form-label">
+                                <div class="sub1">Confirm Password</div>
+                            </label>
+                            <div class="col-xs-4">
+                                {{form.password2}}
+                            </div>
+                            <div class="col-xs-5 col-sm-offset-5" style="color:white">
+                                {{form.password2.errors}}
+                            </div>
+                        </div>
+                        </br>
+                        <div class="form-group row marg-bott" align="center">
+                            <button type="submit" class="btn btn-default">Sign Up</button>
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <br>
-    <br>
-    <br>
+
 {% endblock %}

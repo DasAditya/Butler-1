@@ -1,0 +1,125 @@
+.demo-card-image.mdl-card {
+      width: 256px;
+      height: 256px;
+    }
+    .demo-card-image > .mdl-card__actions {
+      height: 52px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .demo-card-image__filename {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+.content
+{
+    opacity: 1;
+}
+.parallax {
+
+    background:url('images/untitled.png');
+    /* Set a specific height */
+    min-height: 105%;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 7px solid black;
+}
+.flt
+{
+    float:right;
+}
+@font-face
+{
+font-family:kirvy;
+src: url('fonts/Kirvy-Light.otf');
+}
+.bod{
+overflow-x:hidden;
+font-family:kirvy;
+background:url('images/room5.jpg') center/cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+.button1 {
+background: #ecedd1;
+color: #806040;
+height:auto;
+width:auto;
+margin:none;
+border-style:none;
+border-radius: 5px;
+transition: all 0.3s ease 0s;
+}
+
+.button1:hover {
+background: #806040;
+color: #FFFFFF;
+}
+.sub
+{
+    color:#ffffff;
+    font-size: 25px;
+    font-family:Century Gothic;
+    letter-spacing: 7px;
+}
+.ghost-button-transition {
+  font-family: Century Gothic;
+  display: inline-block;
+  width: 150px;
+  padding: 8px;
+  color:#ffffff;
+  border: 2px solid #ffffff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+}
+.ghost-button-transition:hover,
+.ghost-button-transition:active,
+.ghost-button-transition:visited{
+cursor: pointer;text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s ease-in,
+              color 0.3s ease-in;
+}
+a:hover, a:visited, a:link, a:active
+    {
+        color:white;
+        text-decoration: none;
+    }
+.title
+{
+    letter-spacing:1px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.dropdown-menu
+{
+    background:#ecedd1 ;
+}
+.droplist
+{
+    color: #806040;
+}
+
+#rentcard {
+    background: url('images/house1.jpg') center / cover;
+}
+
+#servicecard {
+    background: url('images/demand.jpg') center / cover;
+}
+
+#hotelcard {
+    background: url('images/food2.jpg') center / cover;
+}
+
+#furniturecard {
+    background: url('images/chair.jpg') center / cover;
+}

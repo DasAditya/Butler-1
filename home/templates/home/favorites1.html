@@ -1,0 +1,61 @@
+<h2>Favorites of {{fname}}</h2>
+        {% if restaurants %}
+        <h2>Bookmarked Restaurants</h2>
+                {% for rest in restaurants %}
+
+                                <h4>Name : {{ rest.restaurant_name }}</h4>
+                                <h4>Cuisine : {{ rest.restaurant_cuisine }}</h4>
+                                <h4>Avg cost for 2 : {{ rest.restaurant_avgcostfor2 }}</h4>
+                                <h4>User Rating : {{ rest.user_rating_agg }}</h4>
+                                ____________________________________________________
+                {% endfor %}
+         {% endif %}
+
+
+
+
+
+        {% if houses %}
+            <!-- Houses -->
+        <h2>Bookmarked Houses</h2>
+                {% for house in houses %}
+
+
+
+
+                                <h4>Property Name : {{ house.house_title }}</h4>
+                                <h4>Rent : {{ house.rent_price }}</h4>
+                                <h4>Configuration : {{ house.config }}</h4>
+                                 ____________________________________________________
+                {% endfor %}
+        {% endif %}
+
+        {% if homeservices %}
+            <!-- Houses -->
+                <h2>Bookmarked Services</h2>
+                {% for homeservice in homeservices %}
+
+
+
+                                <h4>Name : {{ homeservice.name}}</h4>
+                                <h4>Type : {{ homeservice.type }}</h4>
+                                <h4>Rating : {{ homeservice.rating }}</h4>
+                                <h4>Contact : {{homeservice.contact}}</h4>
+         ____________________________________________________
+                {% endfor %}
+        {% endif %}
+
+        {% if furnitures %}
+            <!-- Houses -->
+                <h2>Bookmarked Furnitures</h2>
+                {% for fur in furnitures %}
+
+
+
+                                <h4>Name : {{ fur.name}}</h4>
+                                <h4>Type : {{ fur.type }}</h4>
+                                <h4>Rating : {{ fur.rating }}</h4>
+                                <h4>Contact : {{ fur.contact}}</h4>
+         ____________________________________________________
+                {% endfor %}
+        {% endif %}

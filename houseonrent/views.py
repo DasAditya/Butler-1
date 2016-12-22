@@ -50,9 +50,10 @@ def index(request):
                 rnd_index = random.randint(0, Picture.objects.all().count()-1)
                 temp = Picture.objects.all()[rnd_index]
                 a.house_pic = temp.house_thumb
-                temp = BookmarkHouse.objects.filter(latitude=a.latitude, user=request.user).count()
-                if temp != 0:
-                    a.is_bookmarked = True
+                if request.user.is_authenticated():
+                    temp = BookmarkHouse.objects.filter(latitude=a.latitude, user=request.user).count()
+                    if temp != 0:
+                        a.is_bookmarked = True
                 a.save()
 
             houses = House.objects.all()
@@ -135,8 +136,10 @@ def search(request):
     query = request.GET.get("q")
     if query:
         houses = houses.filter(
-            Q(house_title__icontains=query) |
-            Q(config__icontains=query)
+            Q(name__icontains=query) |
+            Q(address__icontains=query) |
+            Q(config__icontains=query) |
+            Q(rent_price__icontains=query)
         ).distinct()
         context = {'houses': houses,
                    'form': form,

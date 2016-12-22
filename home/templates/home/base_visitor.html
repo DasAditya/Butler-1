@@ -1,121 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BUTLER</title>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        {% load staticfiles%}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{%static 'home/fonts/font-awesome-4.6.3/font-awesome-4.6.3/css/font-awesome.min.css'%}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>>
+        {% block style %}
+            <link rel="stylesheet" type="text/css" href="{%static 'home/sty_register.css'%}">
+        {% endblock %}
+		<title>The Butler</title>
+		<script>
 
-    {% load staticfiles %}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-        <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+					$(function() {
+			$('a[href*="#"]:not([href="#"])').click(function() {
+			  if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+				var target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+				if (target.length) {
+				  $('html, body').animate({
+					scrollTop: target.offset().top
+				  }, 800);
+				  return false;
+				}
+			  }
+			});
+		  });
+		  $(document).ready(function(){
+			  $('.danger').popover({
+				html : true,
+				content: function() {
+				  return $('#popover_content_wrapper').html();
+				}
+			  });
+			});
 
-        <link rel="stylesheet" type="text/css" href="{% static 'home/styles.css' %}" />
 
-</head>
+		</script>
+
+	</head>
+	<body class="bod">
+			<nav class="navbar navbar-fixed-top navbar-light bg-faded" style="background-color: #ecedd1;height:50px; ">
+				<a class="navbar-brand" href="{% url 'home:index' %}" style="position:relative; bottom:20px;"><img src="{%static 'home/images/main.png'%}"></a>
+					<div class="row">
+					<div class="col-sm-1">
+					</div>
 
 
-<body>
-<div class="demo-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header mdl-layout__header--transparent">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title" style="font-family:calibri;font-size:30px;">BUTLER</span>
-                <a href="{% url 'home:index' %}" class="mdl-button mdl-color-text--white">
-                    Home
-                </a>
-                <form class="navbar-form navbar-left" role="search" method="get" action="{% block search %}{% endblock %}">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search Here..." name="q" value="{{ request.GET.q }}">
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
+					<ul class="nav navbar-nav">
+						<li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:about' %}"><div class="droplist">About Us</div></a>
+                </li>
+					<li class="nav-item">
+					  <div class="dropdown">
+					  <button class="btn btn-secondary dropdown-toggle" style="background: #ecedd1;color: #806040;"
+							  type="button" id="dropdownMenu1" data-toggle="dropdown"
+							  aria-haspopup="true" aria-expanded="false">
+						Services
+					  </button>
+					  <div class="dropdown-menu"
+						 aria-labelledby="dropdownMenu1">
+						<a class="dropdown-item" href="{% url 'houseonrent:index' %}"><div class="droplist">Houses on Rent</div></a>
+						<a class="dropdown-item" href="{% url 'furnitures:index' %}"><div class="droplist">Furniture</div></a>
+						<a class="dropdown-item" href="{% url 'restaurants:index' %}"><div class="droplist">Food Nearby</div></a>
+						<a class="dropdown-item" href="{% url 'homeservices:index' %}"><div class="droplist">Home Services</div></a>
+
+					  </div>
+					</div>
+					</li>
+						<li class="nav-item">
+                  <a class="nav-link" href="{% url 'forums:index' %}"><button class="button1">Forum</button></a>
+                </li>
+					<li class="nav-item">
+					  <a class="nav-link" href="{% url 'home:login_user' %}"><button class="button1">Login</button></a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link" href="{% url 'home:register' %}"><button class="button1">
+                          Register
+                      </button></a>
+					</li>
+					&nbsp;&nbsp;&nbsp;<!--&nbsp;&nbsp;-->
+						<li class="nav-item">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <form class="form-inline pull-xs-right" role="search" method="get" action="{% block search %}{% endblock %}">
+                    <input class="form-control" type="text" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <button class="button1">Search</button>
                 </form>
 
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"></div>
-                <!-- Navigation -->
-                <nav class="mdl-navigation">
-                    <a href="" class="mdl-button mdl-color-text--white">
-                        <i class="material-icons">library_books</i>
-                        Forums
-                    </a>
-                    <a href="{% url 'home:register' %}" class="mdl-button mdl-color-text--white">
-                        <i class="material-icons">add_box</i>
-                        Register
-                    </a>
-                    <a href="{% url 'home:login_user' %}" class="mdl-button mdl-color-text--white">
-                        <i class="material-icons"></i>
-                        Log In
-                    </a>
-                </nav>
+                </li>
+
+                </ul>
             </div>
-        </header>
-
-        <!-- Modal -->
-<!--
-        <div class="modal fade" id="loginModal" role="dialog">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Log In</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <form>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
-                                <label for="input_email" class="mdl-textfield__label">Email</label>
-                                <input type="email" class="mdl-textfield__input" id="input_email" />
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield&#45;&#45;floating-label">
-                                <label for="input_password" class="mdl-textfield__label">Password</label>
-                                <input type="password" class="mdl-textfield__input" id="input_password" />
-                            </div>
-                            <br>
-                            <button class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-js-ripple-effect"
-                                    type="submit">
-                                Sign In
-                            </button>
-                            <br>
-                        </form>
-                    </div>
-
-                    <div class="modal-footer">
-                        <a href="#">Sign Up</a> &nbsp;
-                        <a href="#">Forgot Password?</a>
-                    </div>
-                </div>
-
-            </div>
+			</nav>
+        <div id="popover-content" class="hide">
+          <!-- MyForm -->
         </div>
--->
 
-        <main class="mdl-layout__content">
-            <br>
-
-            {% block body %}
-
-            {% endblock %}
-
-            <footer class="mdl-mini-footer" style="padding:10px 10px;">
-                <div class="mdl-mini-footer__left-section">
-                    <div class="mdl-logo">Butler</div>
-                    <ul class="mdl-mini-footer__link-list" style="padding-left:50px;">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </div>
-            </footer>
-
-        </main>
-
-    </div>
-
-</body>
+        {% block body %}
+        {% endblock %}
+	</body>
 </html>

@@ -10,6 +10,7 @@ urlpatterns = [
 
     # /home/register/
     url(r'^register/$', views.register, name='register'),
+    url(r'^about/$', views.about, name='about'),
 
     # /home/login/
     url(r'^login_user/$', views.login_user, name='login_user'),
@@ -20,7 +21,10 @@ urlpatterns = [
     # /home/favorites/
     url(r'^favorites/$', views.favorites, name='favorites'),
 
-    # /home/houseonrent/
-    # url(r'^houseonrent/', include('houseonrent.urls'), name='houseonrent'),
+    # /home/favorites/
+    url(r'^send_favorites/$', views.send_favorites, name='send_favorites'),
+
+    # /home/otp/
+    url(r'^(?P<pk>[0-9]+)/otp/$', views.otp_verify, name='otp_verify'),
 
 ]

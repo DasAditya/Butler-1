@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'furnitures.apps.FurnituresConfig',
+    'forums.apps.ForumsConfig',
+    'homeservices.apps.HomeservicesConfig',
     'restaurants.apps.RestaurantsConfig',
     'houseonrent.apps.HouseonrentConfig',
     'home.apps.HomeConfig',
@@ -124,3 +127,13 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'thebutlersite@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'butler123'
+
+EMAIL_PORT = 587

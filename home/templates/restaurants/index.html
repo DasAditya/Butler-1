@@ -4,23 +4,27 @@
     {% url 'restaurants:search' %}
 {% endblock %}
 
+{% block style%}
+    {%load staticfiles%}
+    <link rel="stylesheet" type="text/css" href="{%static 'home/styles_services.css'%}">
+{% endblock %}
+
 {% block body %}
 
+	</br></br></br></br>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-
-            <form class="navbar-form" action="{% url 'restaurants:index' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form.location }}
+    <form action="{% url 'restaurants:index' %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="form-group row" align="center">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                {{form.location}}
+                <div align="center" style="padding: 5px;">
+                    <button type="submit" class="btn btn-default">Search</button>
                 </div>
-                &nbsp; &nbsp;
-                <input type="submit" class="btn btn-default" value="Search"/>
-            </form>
-
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <br>
@@ -28,42 +32,71 @@
 
 <div class="container-fluid resto-container">
 
-        {% if restaurants %}
-            <!-- Houses -->
-            <div class="row">
-                {% for rest in restaurants %}
-                    <div class="col-sm-6 col-lg-3">
+    {% if restaurants %}
+        <!-- Houses -->
+        <div class="row">
+            {% for rest in restaurants %}
+
+
+                <div class="col-sm-3" style="margin-bottom:20px; height: 500px;">
+                    <div class="card">
+                    <div class="card-block">
                         <div class="thumbnail">
-                            <a href="#">
-                                <img src="{{ rest.restaurant_thumb }}" style="height:200px;width:300px;">
+                        <img src="{{ rest.restaurant_thumb }}" style="height:200px; width:250px;">
+                        </div>
+
+                        <h5 class="card-title">{{ rest.restaurant_name }} </h5>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.restaurant_cuisine }}</strong></br></br>
+                        {{ rest.location_locality }}</br>
+                        <strong style="font-weight:bolder;">Rating: {{ rest.user_rating_agg }}</i></strong> <i class="fa fa-star" style="color:yellow"></i>
+                        </br></br><button class="button1" style="position:relative; right:3px;"
+                        data-toggle="modal" data-target="#{{rest.id}}">View Details</button>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'restaurants:bookmark_resto' rest.id %}" class="btn btn-default button1 btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-bookmark {% if rest.is_bookmarked %}active{% endif %}"></span>
                             </a>
-                            <div class="caption">
-                                <h4>{{ rest.restaurant_name }}</h4>
-                                <h6>{{ rest.restaurant_cuisine }}</h6>
-                                <h6>{{ rest.restaurant_avgcostfor2 }}</h6>
-                                <h4>{{ rest.user_rating_agg }}</h4>
+                        {% endif %}
+                        </p>
 
-                                <!-- View Details -->
-                                <a href="#" class="btn btn-danger btn-sm" role="button">
-                                    View Details
-                                </a>
+                        <!--Modal-->
+                        <div class="modal fade" id="{{rest.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel7" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                        <div class="card-block">
+                        <div class="thumbnail" style="float:right;">
+                        <img src="{{ rest.restaurant_thumb }}" style="width:318px; height:232px;">
+                        </div>
+                        <h4 class="card-title">{{ rest.restaurant_name }} </h4>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.restaurant_cuisine }}</strong></br></br></p>
 
-                                {% if user.is_authenticated %}
-                                    <a href="{% url 'restaurants:bookmark_resto' rest.id %}" class="btn btn-default btn-sm btn-favorite" role="button">
-                                        <span class="glyphicon glyphicon-bookmark {% if rest.is_bookmarked %}active{% endif %}"></span>
-                                    </a>
-                                {% endif %}
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.location_address}}</strong></br></br></p>
+                        <p class="card-text"><strong style="font-weight:bolder;color:green;">{{rest.restaurant_avgcostfor2 }} Rs</strong> for two people</br>
+                        <p class="card-text">
+                        <strong style="font-weight:bolder;">{{rest.user_rating_agg}}</i></strong> <i class="fa fa-star" style="color:yellow;"></i></br>
+                        by {{rest.user_rating_vote}} people </p>
 
-                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+
+
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
 
-        {% else %}
-            <h3>No Restaurants available</h3>
 
-        {% endif %}
+
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h3>No Restaurants available</h3>
+
+    {% endif %}
 </div>
 
 {% endblock %}

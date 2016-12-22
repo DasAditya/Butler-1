@@ -1,0 +1,96 @@
+{% extends base_template %}
+
+{% block search %}
+    {% url 'furnitures:search' %}
+{% endblock %}
+
+{% block body %}
+	</br></br></br></br>
+
+<div class="container">
+    <form action="{% url 'furnitures:index' %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="form-group row" align="center">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                {{form.location}}
+                <div align="center" style="padding: 5px;">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+    <br>
+    <br>
+
+
+<div class="container-fluid resto-container">
+
+    {% if furnitures %}
+        <!-- Houses -->
+        <div class="row">
+            {% for fur in furnitures %}
+
+
+
+                <div class="col-sm-3" style="margin-bottom:20px; height: 500px;">
+                    <div class="card">
+                    <div class="card-block">
+                        <div class="thumbnail">
+                        <img src="{{ fur.img }}" style="height:200px; width:250px;">
+                        </div>
+
+                        <h5 class="card-title">{{ fur.name }} </h5>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>Furnitures</strong></br></br>
+                        Open Now : {{ fur.open_now }}</br>
+                        <strong style="font-weight:bolder;">Rating: {{ fur.rating }}</i></strong> <i class="fa fa-star" style="color:yellow"></i>
+                        </br></br><button class="button1" style="position:relative; right:3px;"
+                        data-toggle="modal" data-target="#{{fur.id}}">View Details</button>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'furnitures:bookmark_furniture' fur.id %}" class="btn btn-default button1 btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-bookmark {% if fur.is_bookmarked %}active{% endif %}"></span>
+                            </a>
+                        {% endif %}
+                        </p>
+
+                        <!--Modal-->
+                        <div class="modal fade" id="{{fur.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel7" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                        <div class="card-block">
+                        <div class="thumbnail" style="float:right;">
+                        <img src="{{ fur.img }}" style="width:318px; height:232px;">
+                        </div>
+                        <h4 class="card-title">{{ fur.name}} </h4>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ fur.type }}</strong></br></br></p>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ fur.address}}</strong></br></br></p>
+                        <p class="card-text"><strong style="font-weight:bolder;color:green;">Open Time : {{fur.open_time }}Hrs </strong></br>
+                        <p class="card-text"><strong style="font-weight:bolder;color:red;">Close Time : {{fur.close_time }}Hrs </strong></br>
+                        <p class="card-text">
+                        <strong style="font-weight:bolder;">{{fur.rating}}</i></strong> <i class="fa fa-star" style="color:yellow"></i></br>
+                        Contact : {{fur.contact}} </p>
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h3>No furnitures available</h3>
+
+    {% endif %}
+</div>
+
+{% endblock %}
+

@@ -45,12 +45,20 @@ def index(request):
                     a.restaurant_cuisine = p['restaurant']['cuisines']
                     a.restaurant_avgcostfor2 = p['restaurant']['average_cost_for_two']
                     a.restaurant_thumb = p['restaurant']['thumb']
-                    a.user_rating_agg = p['restaurant']['user_rating']['aggregate_rating']
-                    a.user_rating_vote = p['restaurant']['user_rating']['votes']
+                    if p['restaurant']['user_rating']['aggregate_rating'] == '0':
+                        a.user_rating_agg = 3
+                    else:
+                        a.user_rating_agg = p['restaurant']['user_rating']['aggregate_rating']
+                    if p['restaurant']['user_rating']['votes'] == '0':
+                        a.user_rating_vote = 5
+                    else:
+                        print p['restaurant']['user_rating']['votes']
+                        a.user_rating_vote = p['restaurant']['user_rating']['votes']
                     a.res_id = p['restaurant']['R']['res_id']
-                    temp = BookmarkRest.objects.filter(res_id=a.res_id, user=request.user).count()
-                    if temp != 0:
-                        a.is_bookmarked = True
+                    if request.user.is_authenticated():
+                        temp = BookmarkRest.objects.filter(res_id=a.res_id, user=request.user).count()
+                        if temp != 0:
+                            a.is_bookmarked = True
                     a.save()
                 offset += 20
 
@@ -71,9 +79,9 @@ def index(request):
                 else:
                     r.is_bookmarked = False
 
-        context = {'restaurants': restaurants,
-                   'form': form,
-                   'base_template': base, }
+    context = {'restaurants': restaurants,
+               'form': form,
+               'base_template': base, }
     return render(request, 'restaurants/index.html', context)
 
 

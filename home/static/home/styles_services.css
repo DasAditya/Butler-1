@@ -1,0 +1,97 @@
+@font-face
+{
+    font-family:kirvy;
+    src: url('fonts/Kirvy-Light.otf');
+}
+@font-face
+{
+    font-family:zona;
+    src: url('fonts/ZonaPro-Thin.otf');
+}
+.bod{
+    overflow-x:hidden;
+    font-family:kirvy;
+    background:url('images/food2.jpg') center/cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.button1 {
+    background: #ecedd1;
+    color: #806040;
+    height:auto;
+    width:auto;
+    margin:none;
+    border-style:none;
+    border-radius: 5px;
+    transition: all 0.3s ease 0s;
+}
+
+.button1:hover {
+    background: #806040;
+    color: #FFFFFF;
+}
+.marg-bott{
+    margin-bottom:25px;
+}
+.sub
+{
+    font-weight:bold;
+    color:#ffffff;
+    font-size: 25px;
+    font-family:zona;
+    letter-spacing: 3px;
+}
+.sub1
+{
+    font-weight: lighter;
+    color:#ffffff;
+    font-size: 20px;
+    font-family:zona;
+    letter-spacing: 3px;
+
+}
+
+.ghost-button-transition {
+  font-family: Century Gothic;
+  display: inline-block;
+  width: 150px;
+  padding: 8px;
+  color:#ffffff;
+  border: 2px solid #fff;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out,
+              color 0.2s ease-out;
+}
+.ghost-button-transition:hover,
+.ghost-button-transition:active {
+cursor: pointer;text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s ease-in,
+              color 0.3s ease-in;
+}
+.dropdown-menu
+{
+    background:#ecedd1 ;
+}
+.droplist
+{
+    color: #806040;
+}
+
+.glyphicon-bookmark {
+    color: #CCCCCC;
+    font-size: 16px;
+}
+
+.glyphicon-bookmark.active {
+    color: #FDB230;
+}
+.flt
+{
+    float:right;
+    max-height: 380px;
+    max-width:320px;
+}

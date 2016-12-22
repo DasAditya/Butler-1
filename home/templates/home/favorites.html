@@ -1,72 +1,74 @@
 {% extends 'home/base_logged_in.html' %}
-
+{% block style %}
+{% load staticfiles %}
+            <link rel="stylesheet" type="text/css" href="{%static 'home/styles_fav.css'%}">
+        {% endblock %}
 {% block body %}
+<!--Spacing-->
+			<section class="parallax1">
+			<div >
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			<div align="center"> <br><br><br><p class="sub1" style="font-size:40px;">Favorites</p></div>
+					<form>
+					  <div class="form-group row" align="center">
+						<div class="col-sm-3"></div>
+						<div class="col-sm-6">
+						<div class="btn-group btn-group-lg" role="group" >
+						  <button type="button" style="background-color:#ecedd1"class="btn btn-secondary"><a href="#house1"style="color:#806040;text-decoration:none;">Houses on Rent</a></button>
+						  <button type="button" style=" background-color:#ecedd1"class="btn btn-secondary"><a  href="#furniture"style="color:#806040;text-decoration:none;">Furniture</a></button>
+						  <button type="button" style=" background-color:#ecedd1" class="btn btn-secondary"><a  href="#food" style="color:#806040;text-decoration:none;">Food Nearby</a></button>
+						  <button type="button" style=" background-color:#ecedd1" class="btn btn-secondary"><a  href="#service" style="color:#806040;text-decoration:none;">Services on Demand</a></button>
+						</div>
 
-<div class="container-fluid resto-container">
+					    </div>
+					 </div>
+					</form>
+					</br>
+			<div align="center"> <br><br><p class="sub1">Want to share ?</p>
+			<form role="form" action="{% url 'home:send_favorites' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+					  <div class="form-group row" align="center">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+						<input class="form-control" type="text" placeholder="enter email id" id="id_user" name="email">
+						<div align="center" style="padding: 5px;">
+							<button type="submit" class="btn btn-default">Send</button>
+						</div>
+						</div>
+			</form>
+			</div>
 
-        {% if restaurants %}
-            <!-- Houses -->
-            <div class="row">
-                {% for rest in restaurants %}
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="thumbnail">
-                            <a href="#">
-                                <img src="{{ rest.restaurant_thumb }}" style="height:200px;width:300px;">
-                            </a>
-                            <div class="caption">
-                                <h4>{{ rest.restaurant_name }}</h4>
-                                <h6>{{ rest.restaurant_cuisine }}</h6>
-                                <h6>{{ rest.restaurant_avgcostfor2 }}</h6>
-                                <h4>{{ rest.user_rating_agg }}</h4>
+					</br></br></br></br></br></br></br></br></br>
+					<section id="house1">
+                        <br><br><br><br>
+					</section>
 
-                                <!-- View Details -->
-                                <a href="#" class="btn btn-danger btn-sm" role="button">
-                                    View Details
-                                </a>
+				</div>
+				</section>
 
-                                <!-- Delete Album -->
-                                <form action="{% url 'restaurants:delete_rest' rest.id %}" method="post" style="display: inline;">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="rest_id" value="{{ rest.id }}" />
-                                    <button type="submit" class="btn btn-default btn-sm">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </button>
-                                </form>
 
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+			<!--Stuff goes here-->
 
-        {% else %}
-            <h3>No Restaurants available</h3>
 
-        {% endif %}
-</div>
+				<!--Repeat Here-->
+				<section class="sec">
+				<div align="center"> <br><br>
+					<p class="sub">My Houses
 
-    <div class="container-fluid resto-container">
-
-        {% if houses %}
+					</p>
+				</div>
+					<div class="container-fluid resto-container">
+				{% if houses %}
             <!-- Houses -->
             <div class="row">
                 {% for house in houses %}
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="thumbnail">
-                            <a href="{% url 'houseonrent:detail' house.id %}">
-                                <img src="{{ house.house_pic }}" style="height:200px;width:300px;">
-                            </a>
-                            <div class="caption">
-                                <h4>{{ house.house_title }}</h4>
-                                <h6>{{ house.rent_price }}</h6>
-                                <h4>{{ house.config }}</h4>
 
-                                <!-- View Details -->
-                                <a href=" {% url 'houseonrent:detail' house.id %}" class="btn btn-danger btn-sm" role="button">
-                                    View Details
-                                </a>
-
-                                <!-- Delete Album -->
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="card">
+                            <div class="card-block">
+                                <img src="{{ house.house_pic }}" class="flt" height="auto" width="auto">
+                                <h4 class="card-title">{{ house.config }} Apartment
+                                     <!-- Delete Album -->
                                 <form action="{% url 'houseonrent:delete_house' house.id %}" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" name="house_id" value="{{ house.id }}" />
@@ -74,18 +76,276 @@
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                 </form>
+                                    </br>
+                                    <div style="color:green;">Rs. {{ house.rent_price }} </div>
+                                </h4>
+                                <div class="card-text col-sm-3">
+                                    {{ house.house_title }}
+                                    </br>
+                                    {{ house.address }}
 
-
+                                </div>
+                                <div class="card-text col-sm-5" style="color:red;">
+                                    <br>
+                                        Advanced Payment : Rs {{ house.advance_pymt }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-
         {% else %}
             <h3>No Houses available</h3>
 
         {% endif %}
-    </div>
+						</div>
+
+
+
+
+
+				</section>
+				<section id="furniture">
+				</section>
+
+				<section class="sec">
+				<div align="center"> <br><br>
+					<p class="sub">My Furniture
+
+					</p>
+				</div>
+<div class="container-fluid resto-container">
+
+    {% if furnitures %}
+        <!-- Houses -->
+        <div class="row">
+            {% for fur in furnitures %}
+
+
+
+                <div class="col-sm-3" style="margin-bottom:20px; height: 500px;">
+                    <div class="card">
+                    <div class="card-block">
+                        <div class="thumbnail">
+                        <img src="{{ fur.img }}" style="height:200px; width:250px;">
+                        </div>
+
+                        <h5 class="card-title">{{ fur.name }} </h5>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>Furnitures</strong></br></br>
+                        Open Now : {{ fur.open_now }}</br>
+                        <strong style="font-weight:bolder;">Rating: {{ fur.rating }}</i></strong> <i class="fa fa-star" style="font-color:yellow"></i>
+                        </br></br><button class="button1" style="position:relative; right:3px;"
+                        data-toggle="modal" data-target="#{{fur.id}}">View Details</button>
+                         <!-- Delete Album -->
+                                <form action="{% url 'furnitures:delete_furniture' fur.id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="fur_id" value="{{ fur.id }}" />
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                        </p>
+
+                        <!--Modal-->
+                        <div class="modal fade" id="{{fur.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel7" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                        <div class="card-block">
+                        <div class="thumbnail" style="float:right;">
+                        <img src="{{ fur.img }}" style="width:318px; height:232px;">
+                        </div>
+                        <h4 class="card-title">{{ fur.name}} </h4>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ fur.type }}</strong></br></br></p>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ fur.address}}</strong></br></br></p>
+                        <p class="card-text"><strong style="font-weight:bolder;color:green;">Open Time : {{fur.open_time }}Hrs </strong></br>
+                        <p class="card-text"><strong style="font-weight:bolder;color:red;">Close Time : {{fur.close_time }}Hrs </strong></br>
+                        <p class="card-text">
+                        <strong style="font-weight:bolder;">{{fur.rating}}</i></strong> <i class="fa fa-star" style="color:yellow"></i></br>
+                        Contact : {{fur.contact}} </p>
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h3>No furnitures available</h3>
+
+    {% endif %}
+</div>
+
+				</section>
+				<section id="food">
+				</section>
+				<section class="sec">
+
+				<div align="center"> <br><br>
+					<p class="sub">My Food
+
+					</p>
+				</div>
+
+				<div class="container-fluid resto-container">
+
+    {% if restaurants %}
+        <!-- Houses -->
+        <div class="row">
+            {% for rest in restaurants %}
+
+
+                <div class="col-sm-3" style="margin-bottom:20px; height: 500px;">
+                    <div class="card">
+                    <div class="card-block">
+                        <div class="thumbnail">
+                        <img src="{{ rest.restaurant_thumb }}" style="height:200px; width:250px;">
+                        </div>
+
+                        <h5 class="card-title">{{ rest.restaurant_name }} </h5>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.restaurant_cuisine }}</strong></br></br>
+                        {{ rest.location_locality }}</br>
+                        <strong style="font-weight:bolder;">Rating: {{ rest.user_rating_agg }}</i></strong> <i class="fa fa-star" style="font-color:yellow"></i>
+                        </br></br><button class="button1" style="position:relative; right:3px;"
+                        data-toggle="modal" data-target="#{{rest.id}}">View Details</button>
+                         <!-- Delete Album -->
+                                <form action="{% url 'restaurants:delete_rest' rest.id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="rest_id" value="{{ rest.id }}" />
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                        </p>
+
+                        <!--Modal-->
+                        <div class="modal fade" id="{{rest.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel7" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                        <div class="card-block">
+                        <div class="thumbnail" style="float:right;">
+                        <img src="{{ rest.restaurant_thumb }}" style="width:318px; height:232px;">
+                        </div>
+                        <h4 class="card-title">{{ rest.restaurant_name }} </h4>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.restaurant_cuisine }}</strong></br></br></p>
+
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ rest.location_address}}</strong></br></br></p>
+                        <p class="card-text"><strong style="font-weight:bolder;color:green;">{{rest.restaurant_avgcostfor2 }} Rs</strong> for two people</br>
+                        <p class="card-text">
+                        <strong style="font-weight:bolder;">{{rest.user_rating_agg}}</i></strong> <i class="fa fa-star" style="color:yellow"></i></br>
+                        by {{rest.user_rating_vote}} people </p>
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h3>No Restaurants available</h3>
+
+    {% endif %}
+</div>
+
+				</section>
+				<section id="service">
+				</section>
+				<section class="sec">
+
+				<div align="center"> <br><br>
+					<p class="sub">My Services
+
+					</p>
+				</div>
+
+				<div class="container-fluid resto-container">
+
+    {% if homeservices %}
+        <!-- Houses -->
+        <div class="row">
+            {% for home in homeservices %}
+
+
+
+                <div class="col-sm-3" style="margin-bottom:20px; height: 500px;">
+                    <div class="card">
+                    <div class="card-block">
+                        <div class="thumbnail">
+                        <img src="{{ home.img }}" style="height:200px; width:250px;">
+                        </div>
+
+                        <h5 class="card-title">{{ home.name }} </h5>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ home.type }}</strong></br></br>
+                        Open Now : {{ home.open_now }}</br>
+                        <strong style="font-weight:bolder;">Rating: {{ home.rating }}</i></strong> <i class="fa fa-star" style="font-color:yellow"></i>
+                        </br></br><button class="button1" style="position:relative; right:3px;"
+                        data-toggle="modal" data-target="#{{home.id}}">View Details</button>
+                        <!-- Delete Album -->
+                                <form action="{% url 'homeservices:delete_homeservices' home.id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="home_id" value="{{ home.id }}" />
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                        </p>
+
+                        <!--Modal-->
+                        <div class="modal fade" id="{{home.id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel7" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                        <div class="modal-content">
+                        <div class="card-block">
+                        <div class="thumbnail" style="float:right;">
+                        <img src="{{ home.img }}" style="width:318px; height:232px;">
+                        </div>
+                        <h4 class="card-title">{{ home.name}} </h4>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ home.type }}</strong></br></br></p>
+                        <p class="card-text" style="position:relative; bottom:10px;"><strong>{{ home.address}}</strong></br></br></p>
+                        <p class="card-text"><strong style="font-weight:bolder;color:green;">Open Time : {{home.open_time }}Hrs </strong></br>
+                        <p class="card-text"><strong style="font-weight:bolder;color:red;">Close Time : {{home.close_time }}Hrs </strong></br>
+                        <p class="card-text">
+                        <strong style="font-weight:bolder;">{{home.rating}}</i></strong> <i class="fa fa-star" style="color:yellow"></i></br>
+                        Contact : {{home.contact}} </p>
+
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h3>No Homeservices available</h3>
+
+    {% endif %}
+</div>
+				</section>
+
 
 {% endblock %}

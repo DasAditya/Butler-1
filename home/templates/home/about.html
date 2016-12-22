@@ -1,0 +1,72 @@
+{% extends 'home/base_visitor.html' %}
+
+{% block style %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{%static 'home/aboutus.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'home/round-about.css'%}">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <br><br>
+                <h1 class="page-header">About Us
+                    <small>It's Nice to Meet You!</small>
+                </h1>
+                <p>What happens when 3 SPIT geeks meet? An amazing company is conceptualized!</br>
+
+                Meet our founders - Sanket Agrawal, Aditya Das and Amit Gaikwad</br>
+
+                These 3 guys realized that people are spending their precious free time on managing household chores, looking for restaurants instead of pursuing their passions! The problem also existed on service providers' side who had to struggle with minimal training and poor earning potential. Upset but elated, that they had a problem to solve, they set out to create a one stop solution for all household needs. And thus, The Butler was founded in October 2016 with the vision of creating happy households!</p>
+            </div>
+        </div>
+
+        <!-- Team Members Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Our Team</h2>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/14355639_10207488809559524_3659543758476173883_n.jpg?oh=69a3fadea62842112ac2108cedfa7ea0&oe=586F4178" alt="" style="width:200px ; height:200px">
+                <h3>Sanket Agrawal<br>
+                    <small>Backend Developer</small>
+                </h3>
+
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="{% static 'home/images/aditya.jpg' %}" alt="" style="width:200px ; height:200px">
+                <h3>Aditya Das<br>
+                    <small>Backend Developer</small>
+                </h3>
+
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive img-center" src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/12631429_10205408356233915_9200261885220642087_n.jpg?oh=86bc9ac1204a19fb32b10b5a3009a2ba&oe=58A1A182" alt="" style="width:200px ; height:200px">
+                <h3>Amit Gaikwad<br>
+                    <small>Frontend Developer</small>
+                </h3>
+                </div>
+            </div>
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+
+{% endblock %}

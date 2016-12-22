@@ -1,68 +1,95 @@
 {% extends base_template %}
 
+{% block style%}
+    {%load staticfiles%}
+    <link rel="stylesheet" type="text/css" href="{%static 'home/stylesindex_home.css'%}">
+{% endblock %}
+
 {% block body %}
 
-    <br>
-    <br>
+<section class="parallax">
+    <!--Spacing-->
+    </br></br></br></br><br>
+        <br><br><br><br><br><br><br><br>
 
-    <div class="mdl-grid">
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <a href="{% url 'houseonrent:index' %}" style="text-decoration:none">
-                <div class="demo-card-image mdl-card mdl-shadow--4dp" id="rentcard">
-                    <div class="mdl-card__title mdl-card--expand"></div>
-                    <div class="mdl-card__actions">
-                        <span class="demo-card-image__filename">House On Rent</span>
-                    </div>
-                </div>
-            </a>
-        </div>
 
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="eleccard">
-                <div class="mdl-card__title mdl-card--expand"></div>
-                <div class="mdl-card__actions">
-                    <span class="demo-card-image__filename">Electrician</span>
-                </div>
+
+
+    <!--Stuff goes here-->
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                    {%load staticfiles%}
+                <img src="{%static 'home/images/logo.png'%}">
+                <div align="center"> <br><br><p class="sub">PERSONALIZED SERVICES</p></div>
+                <div align="center"><a class="ghost-button-transition" href="#two">GET STARTED</a></div>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br><br><br><br><br><br><br>
 
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <a href="{% url 'restaurants:index' %}" style="text-decoration:none">
-                <div class="demo-card-image mdl-card mdl-shadow--4dp" id="hotelcard">
-                    <div class="mdl-card__title mdl-card--expand"></div>
-                    <div class="mdl-card__actions">
-                        <span class="demo-card-image__filename">Hotels Nearby</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="furniturecard">
-            <div class="mdl-card__title mdl-card--expand"></div>
-                <div class="mdl-card__actions">
-                    <span class="demo-card-image__filename">Furniture</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="maidcard">
-            <div class="mdl-card__title mdl-card--expand"></div>
-                <div class="mdl-card__actions">
-                    <span class="demo-card-image__filename">Maid On Demand</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="mdl-cell--1-offset mdl-cell-3-col">
-            <div class="demo-card-image mdl-card mdl-shadow--4dp" id="grocerycard">
-            <div class="mdl-card__title mdl-card--expand"></div>
-                <div class="mdl-card__actions">
-                    <span class="demo-card-image__filename">Grocery</span>
-                </div>
-            </div>
-        </div>
     </div>
+</section>
+
+<section style="min-height:100%" id="two">
+    </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+
+
+
+
+    <!--Stuff goes here-->
+    <div style="padding:20px;">
+        <div class="row">
+
+            <div class="col-sm-3">
+                <div class="demo-card-image mdl-card mdl-shadow--6dp" id="rentcard">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><p class="title"><a href="{% url 'houseonrent:index' %}">Houses on Rent</a></p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="demo-card-image mdl-card mdl-shadow--6dp" id="furniturecard">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><p class="title"><a href="{% url 'furnitures:index' %}">Furniture</a></p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="demo-card-image mdl-card mdl-shadow--6dp" id="hotelcard">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><p class="title"><a href="{% url 'restaurants:index' %}">Food Nearby</a></p></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="demo-card-image mdl-card mdl-shadow--6dp" id="servicecard">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><p class="title"><a href="{% url 'homeservices:index' %}">Services on Demand</a></p></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br><br><br><br><br><br><br><br>
+    </div>
+</section>
+
 
 {% endblock %}
